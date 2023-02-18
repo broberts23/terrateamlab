@@ -3,7 +3,6 @@ resource "random_id" "randomId" {
   byte_length = 8
 }
 
-
 #Create a resource group
 resource "azurerm_resource_group" "rg1" {
   name     = "${random_id.randomId.hex}-rg"
@@ -121,7 +120,7 @@ resource "azurerm_linux_virtual_machine" "linuxvm1" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
+    sku       = "18.04-LTS"
     version   = "latest"
   }
   boot_diagnostics {
