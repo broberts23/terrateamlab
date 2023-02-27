@@ -15,7 +15,7 @@ terraform {
 }
 
 module "state_storage" {
-  source = "./modules/state_storage"
+  source = "./azure/modules/state_storage"
 }
 
 provider "azurerm" {
@@ -23,14 +23,14 @@ provider "azurerm" {
 }
 
 module "resource_group" {
-  source              = "./modules/resource_group"
+  source              = "./azure/modules/resource_group"
   location            = var.location
   resource_group_name = var.resource_group_name
   additional_tags     = var.additional_tags
 }
 
 module "virtual_network" {
-  source               = "./modules/virtual_network"
+  source               = "./azure/modules/virtual_network"
   location             = var.location
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.virtual_network_name
@@ -39,7 +39,7 @@ module "virtual_network" {
 }
 
 module "subnet" {
-  source               = "./modules/subnet"
+  source               = "./azure/modules/subnet"
   location             = var.location
   resource_group_name  = var.resource_group_name
   virtual_network_name = module.virtual_network.vnet_id
