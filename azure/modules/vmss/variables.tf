@@ -1,0 +1,10 @@
+variable "vmss_name" {}
+variable "resource_group_name" {}
+variable "location" {}
+variable "additional_tags" {}
+variable "vmss_sku" {}
+variable "vmss_instance_count" {}
+variable "image" {}
+variable "disk" {}
+variable "subnet_id" {}
+variable "public_key" {}

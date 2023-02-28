@@ -17,7 +17,7 @@ resource "azurerm_storage_account" "tfstate" {
   account_replication_type = "LRS"
 
   tags = {
-    environment = "staging"
+    environment = "Dev"
   }
 }
 
