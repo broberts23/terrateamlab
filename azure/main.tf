@@ -59,6 +59,7 @@ module "vmss" {
   additional_tags     = var.additional_tags
   image               = var.image
   disk                = var.disk
+  // Will prompt for key - Update with KV or Pipleline secret
   public_key          = var.public_key
 }
 

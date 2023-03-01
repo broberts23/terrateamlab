@@ -6,6 +6,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
   sku                 = var.vmss_sku
   instances           = var.vmss_instance_count
   admin_username      = "adminuser"
+  custom_data         = file("web.conf")
   tags                = merge(var.additional_tags)
 
   admin_ssh_key {
@@ -36,17 +37,3 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
     }
   }
 }
-
-resource "azurerm_virtual_machine_scale_set_extension" "startup_script" {
-  name                         = "startup-script"
-  virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.vmss_01.id
-  publisher                    = "Microsoft.Azure.Extensions"
-  type                         = "CustomScript"
-  type_handler_version         = "2.0"
-  settings = jsonencode({ 
-    "fileUris" = ["https://tfstatep6cue.blob.core.windows.net/devscripts/startup.sh"],
-    "commandToExecute" = "sh startup.sh"
-    }
-  )
-}
-
