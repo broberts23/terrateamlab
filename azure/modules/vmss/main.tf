@@ -6,7 +6,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
   sku                 = var.vmss_sku
   instances           = var.vmss_instance_count
   admin_username      = "adminuser"
-  custom_data         = file("web.conf")
+  custom_data         = file("web.config")
   tags                = merge(var.additional_tags)
 
   admin_ssh_key {
