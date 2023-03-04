@@ -33,3 +33,7 @@ additional_tags = {
 loadbalanceripname = "dev-lbpip-01"
 loadbalancername = "dev-lb-01"
 http_port = "3000"
+
+// SSH Key
+kv_name = "tf-core-backend-kv469"
+kv_rg = "tfstate"
