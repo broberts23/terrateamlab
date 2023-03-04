@@ -31,9 +31,15 @@ variable "vmss_sku" {}
 variable "vmss_instance_count" {}
 variable "image" {}
 variable "disk" {}
-variable "public_key" {}
 
 // Load Balancer
+variable "loadbalanceripname" {}
+variable "loadbalancername" {}
+variable "http_port" {}
+
+// SSH Key
+variable "kv_name" {}
+variable "kv_rg" {}
 
 // Tags
 variable "additional_tags" {}

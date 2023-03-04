@@ -8,3 +8,4 @@ variable "image" {}
 variable "disk" {}
 variable "subnet_id" {}
 variable "public_key" {}
+variable "backend_address_pool_id" {}

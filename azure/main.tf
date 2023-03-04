@@ -48,21 +48,37 @@ module "subnet" {
   additional_tags      = var.additional_tags
 }
 
-module "vmss" {
-  source              = "./modules/vmss"
+module "loadbalancer" {
+  source              = "./modules/load_balancer"
   location            = var.location
   resource_group_name = var.resource_group_name
-  subnet_id           = module.subnet.subnet_id
-  vmss_name           = var.vmss_name
-  vmss_instance_count = var.vmss_instance_count
-  vmss_sku            = var.vmss_sku
+  loadbalanceripname  = var.loadbalanceripname
+  loadbalancername    = var.loadbalancername
+  http_port           = var.http_port
   additional_tags     = var.additional_tags
-  image               = var.image
-  disk                = var.disk
-  // Will prompt for key - Update with KV or Pipleline secret
-  public_key          = var.public_key
 }
 
-# module "internal_central_hub" {
-#   source = "./modules/internal_central_hub"
-# }
+module "sshkey" {
+  source  = "./modules/ssh_key"
+  kv_name = var.kv_name
+  kv_rg   = var.kv_rg
+}
+
+module "vmss" {
+  source                  = "./modules/vmss"
+  location                = var.location
+  resource_group_name     = var.resource_group_name
+  subnet_id               = module.subnet.subnet_id
+  vmss_name               = var.vmss_name
+  vmss_instance_count     = var.vmss_instance_count
+  vmss_sku                = var.vmss_sku
+  additional_tags         = var.additional_tags
+  image                   = var.image
+  disk                    = var.disk
+  public_key              = module.sshkey.vmss_ssh_key
+  backend_address_pool_id = module.loadbalancer.backend_address_pool_id
+}
+
+// To Do
+// NSG
+// Key Vault
