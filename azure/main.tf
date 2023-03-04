@@ -48,6 +48,17 @@ module "subnet" {
   additional_tags      = var.additional_tags
 }
 
+module "loadbalancer" {
+  source              = "./modules/load_balancer"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  loadbalanceripname  = var.loadbalanceripname
+  loadbalancername    = var.loadbalancername
+  http_port           = var.http_port
+  additional_tags      = var.additional_tags
+}
+
+
 module "vmss" {
   source              = "./modules/vmss"
   location            = var.location
@@ -60,9 +71,10 @@ module "vmss" {
   image               = var.image
   disk                = var.disk
   // Will prompt for key - Update with KV or Pipleline secret
-  public_key          = var.public_key
+  public_key              = var.public_key
+  backend_address_pool_id = module.loadbalancer.backend_address_pool_id
 }
 
-# module "internal_central_hub" {
-#   source = "./modules/internal_central_hub"
-# }
+// To Do
+// NSG
+// Key Vault

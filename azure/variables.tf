@@ -34,6 +34,9 @@ variable "disk" {}
 variable "public_key" {}
 
 // Load Balancer
+variable "loadbalanceripname" {}
+variable "loadbalancername" {}
+variable "http_port" {}
 
 // Tags
 variable "additional_tags" {}

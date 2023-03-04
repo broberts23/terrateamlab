@@ -1,4 +1,4 @@
-# Generate random text for a unique storage account name
+
 resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
   name                = var.vmss_name
   resource_group_name = var.resource_group_name
@@ -6,7 +6,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
   sku                 = var.vmss_sku
   instances           = var.vmss_instance_count
   admin_username      = "adminuser"
-  custom_data         = file("web.config")
   tags                = merge(var.additional_tags)
 
   admin_ssh_key {
@@ -31,9 +30,23 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
     primary = true
 
     ip_configuration {
-      name      = "internal"
-      primary   = true
-      subnet_id = var.subnet_id
+      name                                   = "internal"
+      primary                                = true
+      subnet_id                              = var.subnet_id
+      load_balancer_backend_address_pool_ids = [var.backend_address_pool_id]
     }
   }
+}
+
+ resource "azurerm_virtual_machine_scale_set_extension" "vmss-extension" {
+  name                         = "vmss-extension"
+  virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.vmss_01.id
+  publisher                    = "Microsoft.Azure.Extensions"
+  type                         = "CustomScript"
+  type_handler_version         = "2.0"
+  settings = jsonencode({
+    "fileUris"         = ["https://tfstatep6cue.blob.core.windows.net/devscripts/startup.sh"],
+    "commandToExecute" = "sh startup.sh"
+    }
+  )
 }
