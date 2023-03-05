@@ -77,8 +77,9 @@ module "vmss" {
   disk                    = var.disk
   public_key              = module.sshkey.vmss_ssh_key
   backend_address_pool_id = module.loadbalancer.backend_address_pool_id
+// Autocale
+
 }
 
 // To Do
 // NSG
-// Key Vault
