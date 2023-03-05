@@ -10,7 +10,7 @@
 # See https://terrateam.io/docs/configuration for details
 ##########################################################################
 name: 'Terrateam Workflow'
-on:
+on :
   workflow_dispatch:
     inputs:
       # The work-token and api-base-url are automatically passed in by the Terrateam backend
