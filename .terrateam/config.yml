@@ -12,16 +12,16 @@ dirs:
     workspaces:
       dev:
         tags: [dev]
-      prod:
-        tags: [prod]
+      # prod:
+      #   tags: [prod]
 workflows:
   - tag_query: azure dev
     plan:
       - type: init
       - type: plan
         extra_args: ["-var-file=dev.tfvars"]
-  - tag_query: azure prod
-    plan:
-      - type: init
-      - type: plan
-        extra_args: ["-var-file=prod.tfvars"]
+  # - tag_query: azure prod
+  #   plan:
+  #     - type: init
+  #     - type: plan
+  #       extra_args: ["-var-file=prod.tfvars"]
