@@ -1,5 +1,5 @@
-variable "resource_group_name" {}
-variable "virtual_network_name" {}
+variable "resourceGroupName" {}
+variable "virtualNetworkName" {}
 variable "location" {}
-variable "address_space" {}
-variable "additional_tags" {}
+variable "addressSpace" {}
+variable "additionalTags" {}

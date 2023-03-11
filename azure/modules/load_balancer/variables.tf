@@ -1,6 +1,6 @@
-variable "resource_group_name" {}
+variable "resourceGroupName" {}
 variable "location" {}
-variable "loadbalanceripname" {}
-variable "loadbalancername" {}
-variable "http_port" {}
-variable "additional_tags" {}
+variable "loadbalancerIpName" {}
+variable "loadbalancerName" {}
+variable "httpPort" {}
+variable "additionalTags" {}

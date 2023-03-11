@@ -1,2 +1,2 @@
-variable "kv_name" {}
-variable "kv_rg" {}
+variable "keyVaultName" {}
+variable "keyVaulResourceGroup" {}

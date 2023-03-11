@@ -1,3 +1,3 @@
-variable "resource_group_name" {}
+variable "resourceGroupName" {}
 variable "location" {}
-variable "additional_tags" {}
+variable "additionalTags" {}

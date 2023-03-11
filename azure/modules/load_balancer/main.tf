@@ -1,16 +1,16 @@
 resource "azurerm_public_ip" "vmss_lb_pip" {
-  name                = var.loadbalanceripname
+  name                = var.loadbalancerIpName
   location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = var.resourceGroupName
   allocation_method   = "Static"
-  tags                = merge(var.additional_tags)
+  tags                = merge(var.additionalTags)
 }
 
 resource "azurerm_lb" "vmss_lb" {
-  name                = var.loadbalancername
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  tags                = merge(var.additional_tags)
+  name              = var.loadbalancerName
+  location          = var.location
+  resource_group_name = var.resourceGroupName
+  tags              = merge(var.additionalTags)
 
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
@@ -26,18 +26,18 @@ resource "azurerm_lb_backend_address_pool" "vmss_bepool" {
 resource "azurerm_lb_probe" "vmss_probe" {
   loadbalancer_id = azurerm_lb.vmss_lb.id
   name            = "website-probe"
-  port            = var.http_port
+  port            = var.httpPort
 }
 
 resource "azurerm_lb_rule" "vmss_lb_rule" {
   loadbalancer_id                = azurerm_lb.vmss_lb.id
   name                           = "http"
   protocol                       = "Tcp"
-  frontend_port                  = var.http_port
-  backend_port                   = var.http_port
+  frontend_port                  = var.httpPort
+  backend_port                   = var.httpPort
   frontend_ip_configuration_name = "PublicIPAddress"
   //bacbackend_address_pool_ids    = azurerm_lb_backend_address_pool.vmss_bepool.id
-  probe_id                       = azurerm_lb_probe.vmss_probe.id
+  probe_id = azurerm_lb_probe.vmss_probe.id
 }
 
 

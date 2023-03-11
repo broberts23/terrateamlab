@@ -1,12 +1,12 @@
 
 resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
-  name                = var.vmss_name
-  resource_group_name = var.resource_group_name
+  name                = var.vmssName
+  resource_group_name = var.resourceGroupName
   location            = var.location
-  sku                 = var.vmss_sku
-  instances           = var.vmss_instance_count
+  sku                 = var.vmssSku
+  instances           = var.vmssInstanceCount
   admin_username      = "adminuser"
-  tags                = merge(var.additional_tags)
+  tags                = merge(var.additionalTags)
 
   admin_ssh_key {
     username   = "adminuser"
@@ -21,7 +21,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
   }
 
   os_disk {
-    storage_account_type = var.disk.storage_account_type
+    storage_account_type = var.disk.storageAccountType
     caching              = var.disk.caching
   }
 
@@ -53,7 +53,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
 
 resource "azurerm_monitor_autoscale_setting" "vmss_autoscale" {
   name                = "myAutoscaleSetting"
-  resource_group_name = var.resource_group_name
+  resource_group_name = var.resourceGroupName
   location            = var.location
   target_resource_id  = azurerm_linux_virtual_machine_scale_set.vmss_01.id
 

@@ -1,17 +1,17 @@
 // Core Vars
-location             = "australiaeast"
-resource_group_name  = "terrateam-dev-rg"
+location          = "australiaeast"
+resourceGroupName = "terrateam-dev-rg"
 
 // Network
-virtual_network_name = "dev-vnet-01"
-address_space        = "10.0.0.0/16"
-subnet_name          = "dev-subnet-01"
-subnet_address       = "10.0.1.0/24"
+virtualNetworkName = "dev-vnet-01"
+addressSpace       = "10.0.0.0/16"
+subnetName         = "dev-subnet-01"
+subnetAddress      = "10.0.1.0/24"
 
 // VMSS
-vmss_name           = "dev-vmss-01"
-vmss_sku            = "Standard_F2"
-vmss_instance_count = "3"
+vmssName          = "dev-vmss-01"
+vmssSku           = "Standard_F2"
+vmssInstanceCount = "3"
 image = {
   publisher = "Canonical"
   offer     = "UbuntuServer"
@@ -19,21 +19,31 @@ image = {
   version   = "latest"
 }
 disk = {
-  storage_account_type = "Standard_LRS"
-  caching              = "ReadWrite"
+  storageAccountType = "Standard_LRS"
+  caching            = "ReadWrite"
 }
 
 // Tags
-additional_tags = {
+additionalTags = {
   Name        = "TerrateamTesting"
   Environment = "Dev"
 }
 
 // Load Balancer
-loadbalanceripname = "dev-lbpip-01"
-loadbalancername = "dev-lb-01"
-http_port = "3000"
+loadbalancerIpName = "dev-lbpip-01"
+loadbalancerName   = "dev-lb-01"
+httpPort           = "3000"
 
 // SSH Key
-kv_name = "tf-core-backend-kv469"
-kv_rg = "tfstate"
+keyVaultName               = "tf-core-backend-kv469"
+keyVaulResourceGroup = "tfstate"
+
+// Servicebus
+servicebusNamespaceName = "dev-servicebus-01"
+servicebusNamespaceSku  = "Standard"
+serviceBusQueueName = [
+    "inputQueue01",
+    "inputQueue02",
+    "outputQueue01",
+    "outputQueue02"
+  ]

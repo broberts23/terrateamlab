@@ -1,9 +1,9 @@
-variable "vmss_name" {}
-variable "resource_group_name" {}
+variable "vmssName" {}
+variable "resourceGroupName" {}
 variable "location" {}
-variable "additional_tags" {}
-variable "vmss_sku" {}
-variable "vmss_instance_count" {}
+variable "additionalTags" {}
+variable "vmssSku" {}
+variable "vmssInstanceCount" {}
 variable "image" {}
 variable "disk" {}
 variable "subnet_id" {}

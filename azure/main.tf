@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.3.0"
+  required_version = ">= 1.4.0"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -23,63 +23,71 @@ module "state_storage" {
 }
 
 module "resource_group" {
-  source              = "./modules/resource_group"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  additional_tags     = var.additional_tags
+  source            = "./modules/resource_group"
+  location          = var.location
+  resourceGroupName = var.resourceGroupName
+  additionalTags    = var.additionalTags
 }
 
 module "virtual_network" {
-  source               = "./modules/virtual_network"
-  location             = var.location
-  resource_group_name  = var.resource_group_name
-  virtual_network_name = var.virtual_network_name
-  address_space        = var.address_space
-  additional_tags      = var.additional_tags
+  source             = "./modules/virtual_network"
+  location           = var.location
+  resourceGroupName  = var.resourceGroupName
+  virtualNetworkName = var.virtualNetworkName
+  addressSpace       = var.addressSpace
+  additionalTags     = var.additionalTags
 }
 
 module "subnet" {
-  source               = "./modules/subnet"
-  location             = var.location
-  resource_group_name  = var.resource_group_name
-  virtual_network_name = module.virtual_network.vnet_id
-  subnet_name          = var.subnet_name
-  subnet_address       = var.subnet_address
-  additional_tags      = var.additional_tags
+  source             = "./modules/subnet"
+  location           = var.location
+  resourceGroupName  = var.resourceGroupName
+  virtualNetworkName = module.virtual_network.vnet_id
+  subnetName         = var.subnetName
+  subnetAddress      = var.subnetAddress
+  additionalTags     = var.additionalTags
 }
 
 module "loadbalancer" {
-  source              = "./modules/load_balancer"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  loadbalanceripname  = var.loadbalanceripname
-  loadbalancername    = var.loadbalancername
-  http_port           = var.http_port
-  additional_tags     = var.additional_tags
+  source             = "./modules/load_balancer"
+  location           = var.location
+  resourceGroupName  = var.resourceGroupName
+  loadbalancerIpName = var.loadbalancerIpName
+  loadbalancerName   = var.loadbalancerName
+  httpPort           = var.httpPort
+  additionalTags     = var.additionalTags
 }
 
 module "sshkey" {
-  source  = "./modules/ssh_key"
-  kv_name = var.kv_name
-  kv_rg   = var.kv_rg
+  source               = "./modules/ssh_key"
+  keyVaultName         = var.keyVaultName
+  keyVaulResourceGroup = var.keyVaulResourceGroup
 }
 
 module "vmss" {
   source                  = "./modules/vmss"
   location                = var.location
-  resource_group_name     = var.resource_group_name
+  resourceGroupName       = var.resourceGroupName
   subnet_id               = module.subnet.subnet_id
-  vmss_name               = var.vmss_name
-  vmss_instance_count     = var.vmss_instance_count
-  vmss_sku                = var.vmss_sku
-  additional_tags         = var.additional_tags
+  vmssName                = var.vmssName
+  vmssInstanceCount       = var.vmssInstanceCount
+  vmssSku                 = var.vmssSku
+  additionalTags          = var.additionalTags
   image                   = var.image
   disk                    = var.disk
   public_key              = module.sshkey.vmss_ssh_key
   backend_address_pool_id = module.loadbalancer.backend_address_pool_id
-// Autocale
-
+  // Autocale variables
 }
 
+module "servicebus" {
+  source                  = "./modules/service_bus"
+  additionalTags          = var.additionalTags
+  location                = var.location
+  resourceGroupName       = var.resourceGroupName
+  servicebusNamespaceName = var.servicebusNamespaceName
+  servicebusNamespaceSku  = var.servicebusNamespaceSku
+  serviceBusQueueName     = var.serviceBusQueueName
+}
 // To Do
 // NSG

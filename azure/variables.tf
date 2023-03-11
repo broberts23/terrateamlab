@@ -14,32 +14,37 @@
 # }
 
 // Resource Group
-variable "resource_group_name" {}
+variable "resourceGroupName" {}
 variable "location" {}
 
 // Vnet
-variable "virtual_network_name" {}
-variable "address_space" {}
+variable "virtualNetworkName" {}
+variable "addressSpace" {}
 
 // Subnet
-variable "subnet_name" {}
-variable "subnet_address" {}
+variable "subnetName" {}
+variable "subnetAddress" {}
 
 // VMSS
-variable "vmss_name" {}
-variable "vmss_sku" {}
-variable "vmss_instance_count" {}
+variable "vmssName" {}
+variable "vmssSku" {}
+variable "vmssInstanceCount" {}
 variable "image" {}
 variable "disk" {}
 
 // Load Balancer
-variable "loadbalanceripname" {}
-variable "loadbalancername" {}
-variable "http_port" {}
+variable "loadbalancerIpName" {}
+variable "loadbalancerName" {}
+variable "httpPort" {}
 
 // SSH Key
-variable "kv_name" {}
-variable "kv_rg" {}
+variable "keyVaultName" {}
+variable "keyVaulResourceGroup" {}
+
+//Service Bus
+variable "servicebusNamespaceName" {}
+variable "servicebusNamespaceSku" {}
+variable "serviceBusQueueName" {}
 
 // Tags
-variable "additional_tags" {}
+variable "additionalTags" {}
