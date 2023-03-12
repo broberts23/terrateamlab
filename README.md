@@ -19,7 +19,7 @@ The second goal is to use Chec Inspec to validate the deployed resources
     |   ├── output.tf
     |   ├── env.tfvars              # dev.tfvars, prod.tfvars                  
     │   ├── modules
-    |   │   ├── module_folder
+    |   │   ├── module_folder       # load_balancer, virtual_networl
     |   |   |   ├── main.tf
     |   |   |   ├── variables.tf
     |   |   |   ├── output.tf     
