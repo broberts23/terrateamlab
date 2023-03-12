@@ -89,5 +89,3 @@ module "servicebus" {
   servicebusNamespaceSku  = var.servicebusNamespaceSku
   serviceBusQueueName     = var.serviceBusQueueName
 }
-// To Do
-// NSG
