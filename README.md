@@ -1,7 +1,7 @@
 ## The Overview
 
 This side side-project is an experiment/testing of the Terrateam GitOps workflow
-My primary focus will be completed certifications and I'll work on this on Saturday nights (with a few beers :rolf:) and any free time I might get on Sunday.
+My primary focus will be completed certifications and I'll work on this on Saturday nights (with a few beers :rofl:) and any free time I might get on Sunday.
 
 ## The Plan
 
