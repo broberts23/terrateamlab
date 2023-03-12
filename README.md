@@ -1,1 +1,29 @@
-# terrateamlab
+## The Overview
+
+This project is an experiment/testing of the Terrateam GitOps workflow
+
+## The Plan
+
+The plan is two-fold:
+
+One end goal is to have a mutli-environment ci/cd GitHub Workflow that will 'plan' on push and 'plan' on pull-request then wait for an approval gate for the 'apply'
+
+The second goal is to use Chec Inspec to validate the deployed resources
+
+## The Stucture
+    .
+    ├── ...
+    ├── Cloud                   
+    │   ├── Module
+    |   |    ├── main.tf        
+    │   ├── integration         
+    │   └── unit                
+    └── ...
+
+## The List of To-Do :joy:
+
+| Item  | To-Do  |
+| ------| ------------- |
+| 1     | Add NSG's |
+| 2     | Add a database |
+| 3     | Fix the terrateam pipeline |
