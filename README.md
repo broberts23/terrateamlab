@@ -13,9 +13,16 @@ The second goal is to use Chec Inspec to validate the deployed resources
 ## The Stucture
     .
     ├── ...
-    ├── Cloud                   
-    │   ├── Module
-    |   |    ├── main.tf        
+    ├── cloud                       # azure, aws, gcp
+    |   ├── main.tf
+    |   ├── variables.tf
+    |   ├── output.tf
+    |   ├── env.tfvars              # dev.tfvars, prod.tfvars                  
+    │   ├── modules
+    |   │   ├── module_folder
+    |   |   |   ├── main.tf
+    |   |   |   ├── variables.tf
+    |   |   |   ├── output.tf     
     │   ├── integration         
     │   └── unit                
     └── ...
