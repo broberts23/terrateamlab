@@ -44,6 +44,7 @@ servicebusNamespaceSku  = "Standard"
 serviceBusQueueName = [
     "inputQueue01",
     "inputQueue02",
+    // The queue structure makes no sense. Just wanted to use regex to set a variable
     "outputQueue01",
     "outputQueue02"
   ]
