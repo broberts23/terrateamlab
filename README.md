@@ -44,10 +44,10 @@ The backend will be a PaaS probably DynamoDB to keep it simple.
 
 ## The List of To-Do :joy:
 
-| Item  | To-Do  |
-| ------| ------------- |
-| 1     | Add NSG's |
-| 2     | Add a database |
-| 3     | Fix the terrateam pipeline |
-| 4     | Private endpoints |
-| 5     | RBAC |
+| Item | To-Do                      |
+| ---- | -------------------------- |
+| 1    | Add NSG's                  |
+| 2    | Add a database             |
+| 3    | Fix the terrateam pipeline |
+| 4    | Private endpoints          |
+| 5    | RBAC                       |

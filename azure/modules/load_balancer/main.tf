@@ -7,10 +7,10 @@ resource "azurerm_public_ip" "vmss_lb_pip" {
 }
 
 resource "azurerm_lb" "vmss_lb" {
-  name              = var.loadbalancerName
-  location          = var.location
+  name                = var.loadbalancerName
+  location            = var.location
   resource_group_name = var.resourceGroupName
-  tags              = merge(var.additionalTags)
+  tags                = merge(var.additionalTags)
 
   frontend_ip_configuration {
     name                 = "PublicIPAddress"

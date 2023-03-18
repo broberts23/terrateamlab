@@ -6,8 +6,8 @@ resource "tls_private_key" "vmss_ssh_key" {
 }
 
 data "azurerm_key_vault" "kv1" {
-  name                        = var.keyVaultName
-  resource_group_name         = var.keyVaulResourceGroup
+  name                = var.keyVaultName
+  resource_group_name = var.keyVaulResourceGroup
 }
 
 resource "azurerm_key_vault_secret" "privatekey" {

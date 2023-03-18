@@ -35,16 +35,16 @@ loadbalancerName   = "dev-lb-01"
 httpPort           = "3000"
 
 // SSH Key
-keyVaultName               = "tf-core-backend-kv469"
+keyVaultName         = "tf-core-backend-kv469"
 keyVaulResourceGroup = "tfstate"
 
 // Servicebus
 servicebusNamespaceName = "dev-servicebus-01"
 servicebusNamespaceSku  = "Standard"
 serviceBusQueueName = [
-    "inputQueue01",
-    "inputQueue02",
-    // The queue structure makes no sense. Just wanted to use regex to set a variable
-    "outputQueue01",
-    "outputQueue02"
-  ]
+  "inputQueue01",
+  "inputQueue02",
+  // The queue structure makes no sense. Just wanted to use regex to set a variable
+  "outputQueue01",
+  "outputQueue02"
+]
