@@ -12,8 +12,8 @@ dirs:
     workspaces:
       dev:
         tags: [dev]
-      prod:
-        tags: [prod]
+      # prod:
+      #   tags: [prod]
 workflows:
   - tag_query: azure dev
     plan:
