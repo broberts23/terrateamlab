@@ -38,7 +38,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
   }
 }
 
- resource "azurerm_virtual_machine_scale_set_extension" "vmss-extension" {
+resource "azurerm_virtual_machine_scale_set_extension" "vmss-extension" {
   name                         = "vmss-extension"
   virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.vmss_01.id
   publisher                    = "Microsoft.Azure.Extensions"

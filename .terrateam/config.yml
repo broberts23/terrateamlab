@@ -4,7 +4,7 @@ automerge:
   delete_branch: true
 
 when_modified:
-  autoplan: true
+  autoplan: false
 dirs:
   azure:
     create_and_select_workspace: false
