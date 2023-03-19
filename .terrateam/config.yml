@@ -1,10 +1,13 @@
-enabled: true
+---
 automerge:
-  enabled: true
   delete_branch: true
-
-when_modified:
-  autoplan: false
+  enabled: true
+      # prod:
+      #   tags: [prod]
+cost_estimation:
+  currency: AUD
+  enabled: true
+  provider: infracost
 dirs:
   azure:
     create_and_select_workspace: false
@@ -12,14 +15,16 @@ dirs:
     workspaces:
       dev:
         tags: [dev]
-      # prod:
-      #   tags: [prod]
+enabled: true
+when_modified:
+  autoplan: false
 workflows:
   - tag_query: azure dev
     plan:
       - type: init
       - type: plan
         extra_args: ["-var-file=dev.tfvars"]
+    
   # - tag_query: azure prod
   #   plan:
   #     - type: init
