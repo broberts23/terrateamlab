@@ -12,7 +12,7 @@ The plan is two-fold:
 
 One end goal is to have a mutli-environment ci/cd GitHub Workflow that will 'plan' on push and 'plan' on pull-request then wait for an approval gate for the 'apply'
 
-The second goal is to use Chec Inspec to validate the deployed resources
+The second goal is to use Chef Inspec to validate the deployed resources
 
 ## The Stucture
     .
@@ -35,11 +35,11 @@ The second goal is to use Chec Inspec to validate the deployed resources
 
 The plan is the make this a three teir stack.
 
-I've created Service Bus queues that will handle the decoupling for whetever the front end will be. At the moment I'm thinking a static web app that will place the form in a queue.
+I've created Service Bus queues that will handle the decoupling for whetever the front end will be. At the moment I'm thinking a static web app that will place a form in a queue.
 
-At the moment the middle teir is running on an Azure VMSS fronted by a load balancer. I may change this to be AKS or Functions in the future. But might save that for a seperate project. The middle/application teir would pull the message of the queue.
+At the moment the middle teir is running on an Azure VMSS, fronted by a load balancer. I may change this to be AKS or Functions in the future. But might save that for a seperate project. The middle/application teir would pull the message of the queue.
 
-The backend will be a PaaS probably DynamoDB to keep it simple.
+The backend will be a PaaS database, probably DynamoDB to keep it simple.
 
 
 ## The List of To-Do :joy:
