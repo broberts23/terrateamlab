@@ -27,7 +27,7 @@ workflows:
         extra_args: ["-var-file=dev.tfvars"]
       - type: env
         name: CKV_SKIP_CHECK
-        cmd: ['LOW']
+        cmd: ['echo', 'LOW']
       - type: run
         cmd: ['checkov-wrapper']
         capture_output: true
