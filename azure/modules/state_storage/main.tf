@@ -15,10 +15,7 @@ resource "azurerm_storage_account" "tfstate" {
   location                 = azurerm_resource_group.tfstate.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
-
-  tags = {
-    environment = "Dev"
-  }
+  tags                     = merge(var.additionalTags)
 }
 
 resource "azurerm_storage_container" "tfstate" {

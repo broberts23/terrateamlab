@@ -7,6 +7,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
   instances           = var.vmssInstanceCount
   admin_username      = "adminuser"
   tags                = merge(var.additionalTags)
+  encryption_at_host_enabled = true
 
   admin_ssh_key {
     username   = "adminuser"

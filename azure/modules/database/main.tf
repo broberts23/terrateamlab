@@ -1,12 +1,17 @@
 resource "azurerm_cosmosdb_account" "mongodbaccount" {
-  name                = var.cosmosdbAccount
-  location            = var.location
-  resource_group_name = var.resourceGroupName
-  offer_type          = var.cosmosdbofferType
-  kind                = var.cosmosdbkind
+  name                      = var.cosmosdbAccount
+  location                  = var.location
+  resource_group_name       = var.resourceGroupName
+  offer_type                = var.cosmosdbofferType
+  kind                      = var.cosmosdbkind
   enable_automatic_failover = var.cosmosdbAutomaticFailover
-  tags                = merge(var.additionalTags)
+  tags                      = merge(var.additionalTags)
+  // Security Best Practice from checkov: https://docs.bridgecrew.io/
+  public_network_access_enabled      = false
+  access_key_metadata_writes_enabled = false
 
+  
+  //convert the capabilities to vars and setup for foreach block
   capabilities {
     name = "EnableAggregationPipeline"
   }

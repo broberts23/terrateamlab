@@ -1,9 +1,17 @@
 resource "azurerm_servicebus_namespace" "service_bus" {
-  name                = var.servicebusNamespaceName
-  location            = var.location
-  resource_group_name = var.resourceGroupName
-  sku                 = var.servicebusNamespaceSku
-  tags                = merge(var.additionalTags)
+  name                          = var.servicebusNamespaceName
+  location                      = var.location
+  resource_group_name           = var.resourceGroupName
+  sku                           = var.servicebusNamespaceSku
+  public_network_access_enabled = false
+  minimum_tls_version           = 1.2
+  local_auth_enabled            = false
+  tags                          = merge(var.additionalTags)
+
+  identity {
+    type = "SystemAssigned"
+  }
+
 }
 
 resource "azurerm_servicebus_queue" "service_bus_queue" {

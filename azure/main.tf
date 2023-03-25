@@ -71,6 +71,7 @@ provider "azurerm" {
 
 module "state_storage" {
   source = "./modules/state_storage"
+  additionalTags    = var.additionalTags
 }
 
 module "resource_group" {
