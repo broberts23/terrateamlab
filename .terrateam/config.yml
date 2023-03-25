@@ -13,7 +13,7 @@ cost_estimation:
 when_modified:
   autoplan: true
 dirs:
-  modules/**:
+  azure/modules/**:
     when_modified:
       file_patterns: []
   azure:
