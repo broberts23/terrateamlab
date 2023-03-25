@@ -1,10 +1,17 @@
 enabled: true
-automerge:
+# automerge:
+#   delete_branch: true
+#   enabled: true
+#       # prod:
+#       #   tags: [prod]
+
+cost_estimation:
+  currency: AUD
   enabled: true
-  delete_branch: true
+  provider: infracost
 
 when_modified:
-  autoplan: false
+  autoplan: true
 dirs:
   azure:
     create_and_select_workspace: false
@@ -12,14 +19,16 @@ dirs:
     workspaces:
       dev:
         tags: [dev]
-      # prod:
-      #   tags: [prod]
 workflows:
   - tag_query: azure dev
     plan:
       - type: init
       - type: plan
         extra_args: ["-var-file=dev.tfvars"]
+      - type: run
+        cmd: ['checkov-wrapper']
+        capture_output: true
+          
   # - tag_query: azure prod
   #   plan:
   #     - type: init

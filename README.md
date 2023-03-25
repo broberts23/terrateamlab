@@ -48,6 +48,5 @@ The backend will be a PaaS database, probably DynamoDB to keep it simple.
 | ---- | -------------------------- |
 | 1    | Add NSG's                  |
 | 2    | Add a database             |
-| 3    | Fix the terrateam pipeline |
-| 4    | Private endpoints          |
-| 5    | RBAC                       |
+| 3    | Private endpoints          |
+| 4    | RBAC                       |
