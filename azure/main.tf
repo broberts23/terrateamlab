@@ -140,3 +140,21 @@ module "servicebus" {
   servicebusNamespaceSku  = var.servicebusNamespaceSku
   serviceBusQueueName     = var.serviceBusQueueName
 }
+
+module "mongodb" {
+  source                    = "./modules/database"
+  additionalTags            = var.additionalTags
+  location                  = var.location
+  resourceGroupName         = var.resourceGroupName
+  cosmosdbAccount           = var.cosmosdbAccount
+  cosmosdbName              = var.cosmosdbName
+  cosmosdbofferType         = var.cosmosdbofferType
+  cosmosdbkind              = var.cosmosdbkind
+  cosmosdbAutomaticFailover = var.cosmosdbAutomaticFailover
+  cosmosdbThroughput        = var.cosmosdbThroughput
+  mongodbVerion             = var.mongodbVerion
+  geoLocationPrimary        = var.geoLocationPrimary
+  geoLocationSeconday       = var.geoLocationSeconday
+  consistencyPolicy         = var.consistencyPolicy
+  dynamodbBackup            = var.dynamodbBackup
+}

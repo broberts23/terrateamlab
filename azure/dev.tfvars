@@ -48,3 +48,27 @@ serviceBusQueueName = [
   "outputQueue01",
   "outputQueue02"
 ]
+
+// DynamoDB
+cosmosdbAccount           = "tfex-cosmosdb-account"
+cosmosdbName              = "dev-cosmos-mongo-db"
+cosmosdbofferType         = "Standard"
+cosmosdbkind              = "MongoDB"
+cosmosdbAutomaticFailover = true
+cosmosdbThroughput        = 400
+mongodbVerion             = 4.2
+geoLocationPrimary        = "australiaeast"
+geoLocationSeconday       = "australiasoutheast"
+consistencyPolicy = {
+  consistencyLevel = "BoundedStaleness"
+  maxInterval      = 300
+  masStaleness     = 100000
+}
+dynamodbBackup = {
+  type       = "Continuous"
+  interval   = 60
+  retention  = 24
+  redundancy = "Zone"
+}
+
+
