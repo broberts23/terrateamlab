@@ -13,7 +13,10 @@ cost_estimation:
 when_modified:
   autoplan: true
 dirs:
-  azure/**:
+  modules/**:
+  when_modified:
+    file_patterns: []
+  azure:
     create_and_select_workspace: false
     tags: [azure]
     workspaces:
