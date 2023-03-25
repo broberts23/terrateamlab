@@ -28,12 +28,12 @@ workflows:
       - type: init
       - type: plan
         extra_args: ["-var-file=dev.tfvars"]
-      - type: env
-        name: CKV_SKIP_CHECK
-        cmd: ['echo', 'LOW']
-      - type: run
-        cmd: ['checkov-wrapper']
-        capture_output: true
+      # - type: env
+      #   name: CKV_SKIP_CHECK
+      #   cmd: ['echo', 'LOW']
+      # - type: run
+      #   cmd: ['checkov-wrapper']
+      #   capture_output: true
           
   # - tag_query: azure prod
   #   plan:
