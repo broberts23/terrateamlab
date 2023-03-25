@@ -1,20 +1,15 @@
-// This controls the overall use of Terrateam
 enabled: true
-
-// Merge Setting
 # automerge:
 #   delete_branch: true
 #   enabled: true
 #       # prod:
 #       #   tags: [prod]
 
-// Cost Estimation
 cost_estimation:
   currency: AUD
   enabled: true
   provider: infracost
 
-// Multi-Env PR Settings 
 when_modified:
   autoplan: true
 dirs:
@@ -29,10 +24,11 @@ workflows:
     plan:
       - type: init
       - type: plan
+        extra_args: ["-var-file=dev.tfvars"]
       - type: run
         cmd: ['checkov-wrapper']
         capture_output: true
-        extra_args: ["-var-file=dev.tfvars"]  
+          
   # - tag_query: azure prod
   #   plan:
   #     - type: init
