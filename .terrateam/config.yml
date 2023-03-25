@@ -1,13 +1,22 @@
----
-automerge:
-  delete_branch: true
-  enabled: true
-      # prod:
-      #   tags: [prod]
+// This controls the overall use of Terrateam
+enabled: true
+
+// Merge Setting
+# automerge:
+#   delete_branch: true
+#   enabled: true
+#       # prod:
+#       #   tags: [prod]
+
+// Cost Estimation
 cost_estimation:
   currency: AUD
   enabled: true
   provider: infracost
+
+// Multi-Env PR Settings 
+when_modified:
+  autoplan: true
 dirs:
   azure:
     create_and_select_workspace: false
@@ -15,16 +24,15 @@ dirs:
     workspaces:
       dev:
         tags: [dev]
-enabled: true
-when_modified:
-  autoplan: false
 workflows:
   - tag_query: azure dev
     plan:
       - type: init
       - type: plan
-        extra_args: ["-var-file=dev.tfvars"]
-    
+        extra_args: ["-var-file=dev.tfvars"]   
+      - type: run
+        cmd: ['checkov-wrapper']
+        capture_output: true
   # - tag_query: azure prod
   #   plan:
   #     - type: init
