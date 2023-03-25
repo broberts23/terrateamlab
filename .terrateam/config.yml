@@ -29,10 +29,10 @@ workflows:
     plan:
       - type: init
       - type: plan
-        extra_args: ["-var-file=dev.tfvars"]   
       - type: run
         cmd: ['checkov-wrapper']
         capture_output: true
+        extra_args: ["-var-file=dev.tfvars"]  
   # - tag_query: azure prod
   #   plan:
   #     - type: init
