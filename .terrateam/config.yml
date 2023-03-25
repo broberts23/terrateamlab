@@ -14,8 +14,8 @@ when_modified:
   autoplan: true
 dirs:
   modules/**:
-  when_modified:
-    file_patterns: []
+    when_modified:
+      file_patterns: []
   azure:
     create_and_select_workspace: false
     tags: [azure]
