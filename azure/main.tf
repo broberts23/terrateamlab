@@ -70,8 +70,8 @@ provider "azurerm" {
 }
 
 module "state_storage" {
-  source = "./modules/state_storage"
-  additionalTags    = var.additionalTags
+  source         = "./modules/state_storage"
+  additionalTags = var.additionalTags
 }
 
 module "resource_group" {
@@ -129,6 +129,8 @@ module "vmss" {
   disk                    = var.disk
   public_key              = module.sshkey.vmss_ssh_key
   backend_address_pool_id = module.loadbalancer.backend_address_pool_id
+  cosmosdbMasterkey       = module.mongodb.cosmos_db_masterkey
+  cosmosdbEndpoint        = module.mongodb.cosmos_db_endpoint
   // Autocale variables
 }
 

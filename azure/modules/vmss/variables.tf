@@ -9,3 +9,5 @@ variable "disk" {}
 variable "subnet_id" {}
 variable "public_key" {}
 variable "backend_address_pool_id" {}
+variable "cosmosdbMasterkey" {}
+variable "cosmosdbEndpoint" {}
