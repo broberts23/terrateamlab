@@ -5,8 +5,20 @@ resourceGroupName = "terrateam-dev-rg"
 // Network
 virtualNetworkName = "dev-vnet-01"
 addressSpace       = "10.0.0.0/16"
-subnetName         = "dev-subnet-01"
-subnetAddress      = "10.0.1.0/24"
+subnets = {
+  vmss = {
+    subnetName    = "dev-vmsssubnet-01"
+    subnetAddress = "10.0.1.0/24"
+  }
+  ase = {
+    subnetName    = "dev-asesubnet-01"
+    subnetAddress = "10.0.2.0/24"
+  }
+  endpoint = {
+    subnetName    = "dev-endpoint-01"
+    subnetAddress = "10.0.3.0/24"
+  }
+}
 
 // VMSS Flex
 vmssName          = "dev-vmss-01"
@@ -73,4 +85,8 @@ dynamodbBackup = {
   redundancy = "Zone"
 }
 
-
+// Web Apps
+aseName    = "dev-ase-01"
+aspName    = "dev-asp-01"
+aspSku     = "I2v2"
+webAppName = "dev-webapp-01"

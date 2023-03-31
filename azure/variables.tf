@@ -1,17 +1,3 @@
-# variable "ARM_SUBSCRIPTION_ID" {
-#   type    = string
-#   default = ""
-# }
-
-# variable "ARM_CLIENT_SECRET" {
-#   type    = string
-#   default = ""
-# }
-
-# variable "ARM_CLIENT_ID" {
-#   type    = string
-#   default = ""
-# }
 
 // Resource Group
 variable "resourceGroupName" {}
@@ -22,8 +8,7 @@ variable "virtualNetworkName" {}
 variable "addressSpace" {}
 
 // Subnet
-variable "subnetName" {}
-variable "subnetAddress" {}
+variable "subnets" {}
 
 // VMSS Flex
 variable "vmssName" {}
@@ -60,6 +45,12 @@ variable "geoLocationPrimary" {}
 variable "geoLocationSeconday" {}
 variable "consistencyPolicy" {}
 variable "dynamodbBackup" {}
+
+// Web App
+variable "aseName" {}
+variable "aspName" {}
+variable "aspSku" {}
+variable "webAppName" {}
 
 // Tags
 variable "additionalTags" {}
