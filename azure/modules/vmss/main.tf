@@ -56,18 +56,18 @@ resource "azurerm_orchestrated_virtual_machine_scale_set" "vmss_01" {
   }
 }
 
-# resource "azurerm_orchestrated_virtual_machine_scale_set" "vmss-extension" {
-#   name                         = "vmss-extension"
-#   virtual_machine_scale_set_id = azurerm_orchestrated_virtual_machine_scale_set.vmss_01.id
-#   publisher                    = "Microsoft.Azure.Extensions"
-#   type                         = "CustomScript"
-#   type_handler_version         = "2.0"
-#   settings = jsonencode({
-#     "fileUris"         = ["https://tfstatep6cue.blob.core.windows.net/devscripts/startup.sh"],
-#     "commandToExecute" = "sh startup.sh"
-#     }
-#   )
-# }
+resource "azurerm_virtual_machine_scale_set_extension" "vmss-extension" {
+  name                         = "vmss-extension"
+  virtual_machine_scale_set_id = azurerm_orchestrated_virtual_machine_scale_set.vmss_01.id
+  publisher                    = "Microsoft.Azure.Extensions"
+  type                         = "CustomScript"
+  type_handler_version         = "2.0"
+  settings = jsonencode({
+    "fileUris"         = ["https://tfstatep6cue.blob.core.windows.net/devscripts/startup.sh"],
+    "commandToExecute" = "sh startup.sh"
+    }
+  )
+}
 
 resource "azurerm_monitor_autoscale_setting" "vmss_autoscale" {
   name                = "myAutoscaleSetting"
