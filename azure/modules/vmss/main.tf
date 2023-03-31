@@ -1,17 +1,34 @@
 
-resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
-  name                = var.vmssName
-  resource_group_name = var.resourceGroupName
-  location            = var.location
-  sku                 = var.vmssSku
-  instances           = var.vmssInstanceCount
-  admin_username      = "adminuser"
-  tags                = merge(var.additionalTags)
-  encryption_at_host_enabled = true
+resource "azurerm_orchestrated_virtual_machine_scale_set" "vmss_01" {
+  name                        = var.vmssName
+  resource_group_name         = var.resourceGroupName
+  location                    = var.location
+  sku_name                    = var.vmssSku
+  instances                   = var.vmssInstanceCount
+  tags                        = merge(var.additionalTags)
+  encryption_at_host_enabled  = true
+  platform_fault_domain_count = var.faultDomainCount
+  zone_balance                = true
+  eviction_policy             = "Delete"
 
-  admin_ssh_key {
-    username   = "adminuser"
-    public_key = var.public_key
+  priority_mix {
+    regular_percentage_above_base = var.priorityMix
+  }
+
+  os_profile {
+    linux_configuration {
+      admin_username = "adminuser"
+      patch_mode     = "AutomaticByPlatform"
+      admin_ssh_key {
+        username   = "adminuser"
+        public_key = var.public_key
+      }
+    }
+  }
+
+  automatic_instance_repair {
+    enabled      = true
+    grace_period = "PT30M"
   }
 
   source_image_reference {
@@ -41,7 +58,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_01" {
 
 resource "azurerm_virtual_machine_scale_set_extension" "vmss-extension" {
   name                         = "vmss-extension"
-  virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.vmss_01.id
+  virtual_machine_scale_set_id = azurerm_orchestrated_virtual_machine_scale_set.vmss_01.id
   publisher                    = "Microsoft.Azure.Extensions"
   type                         = "CustomScript"
   type_handler_version         = "2.0"
@@ -56,21 +73,18 @@ resource "azurerm_monitor_autoscale_setting" "vmss_autoscale" {
   name                = "myAutoscaleSetting"
   resource_group_name = var.resourceGroupName
   location            = var.location
-  target_resource_id  = azurerm_linux_virtual_machine_scale_set.vmss_01.id
-
+  target_resource_id  = azurerm_orchestrated_virtual_machine_scale_set.vmss_01.id
   profile {
     name = "defaultProfile"
-
     capacity {
       default = 3
       minimum = 3
       maximum = 10
     }
-
     rule {
       metric_trigger {
         metric_name        = "Percentage CPU"
-        metric_resource_id = azurerm_linux_virtual_machine_scale_set.vmss_01.id
+        metric_resource_id = azurerm_orchestrated_virtual_machine_scale_set.vmss_01.id
         time_grain         = "PT1M"
         statistic          = "Average"
         time_window        = "PT5M"
@@ -84,7 +98,6 @@ resource "azurerm_monitor_autoscale_setting" "vmss_autoscale" {
           values   = ["App1"]
         }
       }
-
       scale_action {
         direction = "Increase"
         type      = "ChangeCount"
@@ -92,11 +105,10 @@ resource "azurerm_monitor_autoscale_setting" "vmss_autoscale" {
         cooldown  = "PT1M"
       }
     }
-
     rule {
       metric_trigger {
         metric_name        = "Percentage CPU"
-        metric_resource_id = azurerm_linux_virtual_machine_scale_set.vmss_01.id
+        metric_resource_id = azurerm_orchestrated_virtual_machine_scale_set.vmss_01.id
         time_grain         = "PT1M"
         statistic          = "Average"
         time_window        = "PT5M"

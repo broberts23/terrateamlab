@@ -25,12 +25,14 @@ variable "addressSpace" {}
 variable "subnetName" {}
 variable "subnetAddress" {}
 
-// VMSS
+// VMSS Flex
 variable "vmssName" {}
 variable "vmssSku" {}
 variable "vmssInstanceCount" {}
 variable "image" {}
 variable "disk" {}
+variable "priorityMix" {}
+variable "faultDomainCount" {}
 
 // Load Balancer
 variable "loadbalancerIpName" {}

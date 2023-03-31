@@ -3,7 +3,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.45.0"
+      version = "~> 3.50.0"
     }
   }
   backend "azurerm" {
@@ -128,6 +128,8 @@ module "vmss" {
   image                   = var.image
   disk                    = var.disk
   public_key              = module.sshkey.vmss_ssh_key
+  priorityMix             = var.priorityMix
+  faultDomainCount        = var.faultDomainCount
   backend_address_pool_id = module.loadbalancer.backend_address_pool_id
   cosmosdbMasterkey       = module.mongodb.cosmos_db_masterkey
   cosmosdbEndpoint        = module.mongodb.cosmos_db_endpoint
