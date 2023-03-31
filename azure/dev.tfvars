@@ -8,10 +8,12 @@ addressSpace       = "10.0.0.0/16"
 subnetName         = "dev-subnet-01"
 subnetAddress      = "10.0.1.0/24"
 
-// VMSS
+// VMSS Flex
 vmssName          = "dev-vmss-01"
 vmssSku           = "Standard_F2"
 vmssInstanceCount = "3"
+priorityMix       = 40
+faultDomainCount  = 1
 image = {
   publisher = "Canonical"
   offer     = "UbuntuServer"
