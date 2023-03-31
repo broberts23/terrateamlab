@@ -70,7 +70,8 @@ provider "azurerm" {
 }
 
 module "state_storage" {
-  source = "./modules/state_storage"
+  source         = "./modules/state_storage"
+  additionalTags = var.additionalTags
 }
 
 module "resource_group" {
@@ -128,6 +129,8 @@ module "vmss" {
   disk                    = var.disk
   public_key              = module.sshkey.vmss_ssh_key
   backend_address_pool_id = module.loadbalancer.backend_address_pool_id
+  cosmosdbMasterkey       = module.mongodb.cosmos_db_masterkey
+  cosmosdbEndpoint        = module.mongodb.cosmos_db_endpoint
   // Autocale variables
 }
 
@@ -139,4 +142,22 @@ module "servicebus" {
   servicebusNamespaceName = var.servicebusNamespaceName
   servicebusNamespaceSku  = var.servicebusNamespaceSku
   serviceBusQueueName     = var.serviceBusQueueName
+}
+
+module "mongodb" {
+  source                    = "./modules/database"
+  additionalTags            = var.additionalTags
+  location                  = var.location
+  resourceGroupName         = var.resourceGroupName
+  cosmosdbAccount           = var.cosmosdbAccount
+  cosmosdbName              = var.cosmosdbName
+  cosmosdbofferType         = var.cosmosdbofferType
+  cosmosdbkind              = var.cosmosdbkind
+  cosmosdbAutomaticFailover = var.cosmosdbAutomaticFailover
+  cosmosdbThroughput        = var.cosmosdbThroughput
+  mongodbVerion             = var.mongodbVerion
+  geoLocationPrimary        = var.geoLocationPrimary
+  geoLocationSeconday       = var.geoLocationSeconday
+  consistencyPolicy         = var.consistencyPolicy
+  dynamodbBackup            = var.dynamodbBackup
 }

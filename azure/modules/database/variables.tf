@@ -1,0 +1,14 @@
+variable "resourceGroupName" {}
+variable "location" {}
+variable "additionalTags" {}
+variable "cosmosdbAccount" {}
+variable "cosmosdbName" {}
+variable "cosmosdbofferType" {}
+variable "cosmosdbkind" {}
+variable "cosmosdbAutomaticFailover" {}
+variable "cosmosdbThroughput" {}
+variable "mongodbVerion" {}
+variable "geoLocationPrimary" {}
+variable "geoLocationSeconday" {}
+variable "consistencyPolicy" {}
+variable "dynamodbBackup" {}

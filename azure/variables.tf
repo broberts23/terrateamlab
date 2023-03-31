@@ -46,5 +46,18 @@ variable "servicebusNamespaceName" {}
 variable "servicebusNamespaceSku" {}
 variable "serviceBusQueueName" {}
 
+//DynamoDB
+variable "cosmosdbAccount" {}
+variable "cosmosdbName" {}
+variable "cosmosdbofferType" {}
+variable "cosmosdbkind" {}
+variable "cosmosdbAutomaticFailover" {}
+variable "cosmosdbThroughput" {}
+variable "mongodbVerion" {}
+variable "geoLocationPrimary" {}
+variable "geoLocationSeconday" {}
+variable "consistencyPolicy" {}
+variable "dynamodbBackup" {}
+
 // Tags
 variable "additionalTags" {}
