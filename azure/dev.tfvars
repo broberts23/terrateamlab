@@ -10,13 +10,19 @@ subnets = {
     subnetName    = "dev-vmsssubnet-01"
     subnetAddress = "10.0.1.0/24"
   }
-  ase = {
-    subnetName    = "dev-asesubnet-01"
-    subnetAddress = "10.0.2.0/24"
-  }
   endpoint = {
     subnetName    = "dev-endpoint-01"
     subnetAddress = "10.0.3.0/24"
+  }
+}
+
+delegationSubnets = {
+  ase = {
+    subnetName    = "dev-asesubnet-01"
+    subnetAddress = "10.0.2.0/24"
+    delegationName = "Microsoft.Web.hostingEnvironments"
+    serviceDelegationName = "Microsoft.Web/hostingEnvironments"
+    serviceDelegationActions = ["Microsoft.Network/virtualNetworks/subnets/action"] 
   }
 }
 
@@ -62,6 +68,8 @@ serviceBusQueueName = [
   "outputQueue01",
   "outputQueue02"
 ]
+sbPrivateEndpointName = "dev-servicebus-pe-01"
+
 
 // DynamoDB
 cosmosdbAccount           = "tfex-cosmosdb-account"
@@ -84,6 +92,7 @@ dynamodbBackup = {
   retention  = 24
   redundancy = "Zone"
 }
+dynamodbPrivateEndpointName = "dev-dynamoDB-pe-01"
 
 // Web Apps
 aseName    = "dev-ase-01"

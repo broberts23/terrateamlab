@@ -70,3 +70,16 @@ resource "azurerm_cosmosdb_sql_container" "example" {
     paths = ["/definition/idlong", "/definition/idshort"]
   }
 }
+
+resource "azurerm_private_endpoint" "cosmos_endpoint" {
+  name                = var.dynamodbPrivateEndpointName
+  location            = var.location
+  resource_group_name = var.resourceGroupName
+  subnet_id           = var.enpointsubnet
+
+  private_service_connection {
+    name                           = "${azurerm_cosmosdb_account.mongodbaccount.name}-connection"
+    private_connection_resource_id = azurerm_cosmosdb_account.mongodbaccount.id
+    is_manual_connection           = false
+  }
+}
