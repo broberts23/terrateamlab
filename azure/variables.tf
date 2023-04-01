@@ -45,6 +45,7 @@ variable "geoLocationPrimary" {}
 variable "geoLocationSeconday" {}
 variable "consistencyPolicy" {}
 variable "dynamodbBackup" {}
+variable "dynamodbPrivateEndpointName" {}
 
 // Web App
 variable "aseName" {}

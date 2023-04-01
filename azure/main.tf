@@ -150,6 +150,8 @@ module "mongodb" {
   additionalTags            = var.additionalTags
   location                  = var.location
   resourceGroupName         = var.resourceGroupName
+  virtualNetworkName        = var.virtualNetworkName
+  enpointsubnet             = module.subnet.endpointsSubnet_id
   cosmosdbAccount           = var.cosmosdbAccount
   cosmosdbName              = var.cosmosdbName
   cosmosdbofferType         = var.cosmosdbofferType
