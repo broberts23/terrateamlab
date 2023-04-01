@@ -35,7 +35,7 @@ resource "azurerm_cosmosdb_sql_database" "main" {
   resource_group_name = azurerm_cosmosdb_account.account.resource_group_name
   account_name        = azurerm_cosmosdb_account.account.name
   autoscale_settings {
-    max_throughput = var.cosmosdbThroughput
+    max_throughput = var.max_throughput
   }
 }
 
@@ -78,8 +78,8 @@ resource "azurerm_private_endpoint" "cosmos_endpoint" {
   subnet_id           = var.enpointsubnet
 
   private_service_connection {
-    name                           = "${azurerm_cosmosdb_account.mongodbaccount.name}-connection"
-    private_connection_resource_id = azurerm_cosmosdb_account.mongodbaccount.id
+    name                           = "${azurerm_cosmosdb_account.account.name}-connection"
+    private_connection_resource_id = azurerm_cosmosdb_account.account.id
     is_manual_connection           = false
   }
 }

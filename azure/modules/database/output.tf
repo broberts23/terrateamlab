@@ -1,7 +1,7 @@
 output "cosmos_db_endpoint" {
-  value = azurerm_cosmosdb_account.mongodbaccount.endpoint
+  value = azurerm_cosmosdb_account.account.endpoint
 }
 
 output "cosmos_db_masterkey" {
-  value = azurerm_cosmosdb_account.mongodbaccount.primary_key
+  value = azurerm_cosmosdb_account.account.primary_key
 }

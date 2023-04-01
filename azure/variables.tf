@@ -41,8 +41,6 @@ variable "cosmosdbName" {}
 variable "cosmosdbofferType" {}
 variable "cosmosdbkind" {}
 variable "cosmosdbAutomaticFailover" {}
-variable "cosmosdbThroughput" {}
-variable "mongodbVerion" {}
 variable "geoLocationPrimary" {}
 variable "geoLocationSeconday" {}
 variable "consistencyPolicy" {}
