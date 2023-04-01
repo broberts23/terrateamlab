@@ -9,6 +9,7 @@ variable "addressSpace" {}
 
 // Subnet
 variable "subnets" {}
+variable "delegationSubnets" {}
 
 // VMSS Flex
 variable "vmssName" {}
@@ -32,6 +33,7 @@ variable "keyVaulResourceGroup" {}
 variable "servicebusNamespaceName" {}
 variable "servicebusNamespaceSku" {}
 variable "serviceBusQueueName" {}
+variable "sbPrivateEndpointName" {}
 
 //DynamoDB
 variable "cosmosdbAccount" {}

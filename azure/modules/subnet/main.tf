@@ -14,10 +14,10 @@ resource "azurerm_subnet" "delegationSubnet" {
   virtual_network_name = var.virtualNetworkName
   address_prefixes     = [each.value.subnetAddress]
   delegation {
-    name = var.delegationName
+    name = each.value.delegationName
     service_delegation {
-      name    = var.serviceDelegationName
-      actions = var.serviceDelegationName
+      name    = each.value.serviceDelegationName
+      actions = each.value.serviceDelegationActions
     }
   }
 }

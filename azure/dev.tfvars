@@ -68,6 +68,8 @@ serviceBusQueueName = [
   "outputQueue01",
   "outputQueue02"
 ]
+sbPrivateEndpointName = "dev-servicebus-pe-01"
+
 
 // DynamoDB
 cosmosdbAccount           = "tfex-cosmosdb-account"

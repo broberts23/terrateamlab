@@ -34,3 +34,16 @@ resource "azurerm_servicebus_queue_authorization_rule" "service_bus_auth_rule" {
     azurerm_servicebus_queue.service_bus_queue
   ]
 }
+
+resource "azurerm_private_endpoint" "sb_endpoint" {
+  name                = var.sbPrivateEndpointName
+  location            = var.location
+  resource_group_name = var.resourceGroupName
+  subnet_id           = var.enpointsubnet
+
+  private_service_connection {
+    name                           = "${azurerm_servicebus_namespace.service_bus.name}-connection"
+    private_connection_resource_id = azurerm_servicebus_namespace.service_bus.id
+    is_manual_connection           = false
+  }
+}
