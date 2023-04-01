@@ -33,13 +33,15 @@ The second goal is to use Chef Inspec to validate the deployed resources
 
 ## The Environment
 
-The plan is the make this a three teir stack.
+The plan is to make a decoupled three teir stack.
 
-The front end will be an Azure Web App host in ASE. This is currently closed off to only allow internal traffic. I'm planning on putting Front Door in front of the Web App to play around with the FD Origins in Terraform.
+The is an Azure Web App hosted in an ASE. This is currently closed off to only allow internal traffic. I'm planning on putting Front Door in front of the Web App to play around with the FD Origins in Terraform.
 
-At the moment the middle teir is running on an Azure VMSS Flex, fronted by a load balancer. I may change this to be AKS or Functions in the future. But might save that for a seperate project.
+Between the front and middle teir I've setup Service Bus queues.
 
-The Backend will be DynamoDB to keep it simple.
+At the moment the middle teir is running on Azure VMSS Flex, fronted by a load balancer. I might change this to be AKS or Functions in the future. But might save that for a seperate project, specifically thinking about workflows to deploy AKS deployment or Functions to an ASE.
+
+The backend will be DynamoDB to keep it simple.
 
 
 ## The List of To-Do :joy:
