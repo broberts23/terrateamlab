@@ -1,4 +1,4 @@
-resource "azurerm_cosmosdb_account" "mongodbaccount" {
+resource "azurerm_cosmosdb_account" "account" {
   name                      = var.cosmosdbAccount
   location                  = var.location
   resource_group_name       = var.resourceGroupName
@@ -9,39 +9,19 @@ resource "azurerm_cosmosdb_account" "mongodbaccount" {
   // Security Best Practice from checkov: https://docs.bridgecrew.io/
   public_network_access_enabled      = false
   access_key_metadata_writes_enabled = false
-
-  
-  //convert the capabilities to vars and setup for foreach block
-  capabilities {
-    name = "EnableAggregationPipeline"
-  }
-
-  capabilities {
-    name = "mongoEnableDocLevelTTL"
-  }
-
-  capabilities {
-    name = "EnableServerless"
-  }
-
-  mongo_server_version = var.mongodbVerion
-
   consistency_policy {
     consistency_level       = var.consistencyPolicy.consistencyLevel
     max_interval_in_seconds = var.consistencyPolicy.maxInterval
     max_staleness_prefix    = var.consistencyPolicy.masStaleness
   }
-
   geo_location {
     location          = var.geoLocationSeconday
     failover_priority = 1
   }
-
   geo_location {
     location          = var.geoLocationPrimary
     failover_priority = 0
   }
-
   backup {
     type                = var.dynamodbBackup.type
     interval_in_minutes = var.dynamodbBackup.interval
@@ -50,9 +30,43 @@ resource "azurerm_cosmosdb_account" "mongodbaccount" {
   }
 }
 
-resource "azurerm_cosmosdb_mongo_database" "mongodbdatabase" {
+resource "azurerm_cosmosdb_sql_database" "main" {
   name                = var.cosmosdbName
-  resource_group_name = azurerm_cosmosdb_account.mongodbaccount.resource_group_name
-  account_name        = azurerm_cosmosdb_account.mongodbaccount.name
-  throughput          = var.cosmosdbThroughput
+  resource_group_name = azurerm_cosmosdb_account.account.resource_group_name
+  account_name        = azurerm_cosmosdb_account.account.name
+  autoscale_settings {
+    max_throughput = var.cosmosdbThroughput
+  }
+}
+
+resource "azurerm_cosmosdb_sql_container" "example" {
+  name                  = var.cosmosdbName
+  resource_group_name   = var.resourceGroupName
+  account_name          = azurerm_cosmosdb_account.account.name
+  database_name         = azurerm_cosmosdb_sql_database.main.name
+  partition_key_path    = "/definition/id"
+  partition_key_version = 1
+  autoscale_settings {
+    max_throughput = var.max_throughput
+  }
+
+  indexing_policy {
+    indexing_mode = "consistent"
+
+    included_path {
+      path = "/*"
+    }
+
+    included_path {
+      path = "/included/?"
+    }
+
+    excluded_path {
+      path = "/excluded/?"
+    }
+  }
+
+  unique_key {
+    paths = ["/definition/idlong", "/definition/idshort"]
+  }
 }

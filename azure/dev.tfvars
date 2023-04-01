@@ -65,9 +65,9 @@ serviceBusQueueName = [
 
 // DynamoDB
 cosmosdbAccount           = "tfex-cosmosdb-account"
-cosmosdbName              = "dev-cosmos-mongo-db"
+cosmosdbName              = "dev-cosmos-container-db"
 cosmosdbofferType         = "Standard"
-cosmosdbkind              = "MongoDB"
+cosmosdbkind              = "GlobalDocumentDB"
 cosmosdbAutomaticFailover = true
 cosmosdbThroughput        = 400
 mongodbVerion             = 4.2
