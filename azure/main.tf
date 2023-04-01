@@ -95,8 +95,7 @@ module "subnet" {
   location           = var.location
   resourceGroupName  = var.resourceGroupName
   virtualNetworkName = module.virtual_network.vnet_id
-  subnetName         = var.subnetName
-  subnetAddress      = var.subnetAddress
+  subnets            = var.subnets
   additionalTags     = var.additionalTags
 }
 
@@ -120,7 +119,7 @@ module "vmss" {
   source                  = "./modules/vmss"
   location                = var.location
   resourceGroupName       = var.resourceGroupName
-  subnet_id               = module.subnet.subnet_id
+  subnet_id               = module.subnet.vmssSubnet_id
   vmssName                = var.vmssName
   vmssInstanceCount       = var.vmssInstanceCount
   vmssSku                 = var.vmssSku
@@ -162,4 +161,16 @@ module "mongodb" {
   geoLocationSeconday       = var.geoLocationSeconday
   consistencyPolicy         = var.consistencyPolicy
   dynamodbBackup            = var.dynamodbBackup
+}
+
+module "ase" {
+  source            = "./modules/app_service"
+  location          = var.location
+  resourceGroupName = var.resourceGroupName
+  subnet            = module.subnet.aseSubnet_id
+  additionalTags    = var.additionalTags
+  aseName           = var.aseName
+  aspName           = var.aspName
+  aspSku            = var.aspSku
+  webAppName        = var.webAppName
 }
