@@ -10,7 +10,7 @@ My primary focus will be completing certifications and I'll work on this on Satu
 
 The plan is two-fold:
 
-One end goal is to have a mutli-environment ci/cd GitHub Workflow that will 'plan' on push and 'plan' on pull-request then wait for an approval gate for the 'apply'
+One end goal is to have a mutli-environment ci/cd Terrateam Workflow that will 'plan' on push and 'plan' on pull-request then wait for an approval gate for the 'apply'
 
 The second goal is to use Chef Inspec to validate the deployed resources
 
@@ -23,7 +23,7 @@ The second goal is to use Chef Inspec to validate the deployed resources
     |   ├── output.tf
     |   ├── env.tfvars              # dev.tfvars, prod.tfvars                  
     │   ├── modules
-    |   │   ├── module_folder       # load_balancer, virtual_networl
+    |   │   ├── module_folder       # load_balancer, virtual_network, subnet
     |   |   |   ├── main.tf
     |   |   |   ├── variables.tf
     |   |   |   ├── output.tf     
@@ -35,11 +35,11 @@ The second goal is to use Chef Inspec to validate the deployed resources
 
 The plan is the make this a three teir stack.
 
-I've created Service Bus queues that will handle the decoupling for whetever the front end will be. At the moment I'm thinking a static web app that will place a form in a queue.
+The front end will be an Azure Web App host in ASE. This is currently closed off to only allow internal traffic. I'm planning on putting Front Door in front of the Web App to play around with the FD Origins in Terraform.
 
-At the moment the middle teir is running on an Azure VMSS, fronted by a load balancer. I may change this to be AKS or Functions in the future. But might save that for a seperate project. The middle/application teir would pull the message of the queue.
+At the moment the middle teir is running on an Azure VMSS Flex, fronted by a load balancer. I may change this to be AKS or Functions in the future. But might save that for a seperate project.
 
-The backend will be a PaaS database, probably DynamoDB to keep it simple.
+The Backend will be DynamoDB to keep it simple.
 
 
 ## The List of To-Do :joy:
@@ -47,6 +47,5 @@ The backend will be a PaaS database, probably DynamoDB to keep it simple.
 | Item | To-Do                      |
 | ---- | -------------------------- |
 | 1    | Add NSG's                  |
-| 2    | Add a database             |
-| 3    | Private endpoints          |
-| 4    | RBAC                       |
+| 2    | RBAC                       |
+| 3    | Front Door                 |
