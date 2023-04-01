@@ -131,8 +131,8 @@ module "vmss" {
   priorityMix             = var.priorityMix
   faultDomainCount        = var.faultDomainCount
   backend_address_pool_id = module.loadbalancer.backend_address_pool_id
-  cosmosdbMasterkey       = module.mongodb.cosmos_db_masterkey
-  cosmosdbEndpoint        = module.mongodb.cosmos_db_endpoint
+  cosmosdbMasterkey       = module.cosmosdb.cosmos_db_masterkey
+  cosmosdbEndpoint        = module.cosmosdb.cosmos_db_endpoint
   // Autocale variables
 }
 
@@ -148,7 +148,7 @@ module "servicebus" {
   sbPrivateEndpointName   = var.sbPrivateEndpointName
 }
 
-module "mongodb" {
+module "cosmosdb" {
   source                      = "./modules/database"
   additionalTags              = var.additionalTags
   location                    = var.location
@@ -160,9 +160,7 @@ module "mongodb" {
   cosmosdbofferType           = var.cosmosdbofferType
   cosmosdbkind                = var.cosmosdbkind
   cosmosdbAutomaticFailover   = var.cosmosdbAutomaticFailover
-  cosmosdbThroughput          = var.cosmosdbThroughput
   dynamodbPrivateEndpointName = var.dynamodbPrivateEndpointName
-  mongodbVerion               = var.mongodbVerion
   geoLocationPrimary          = var.geoLocationPrimary
   geoLocationSeconday         = var.geoLocationSeconday
   consistencyPolicy           = var.consistencyPolicy
