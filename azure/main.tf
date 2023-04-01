@@ -96,6 +96,7 @@ module "subnet" {
   resourceGroupName  = var.resourceGroupName
   virtualNetworkName = module.virtual_network.vnet_id
   subnets            = var.subnets
+  delegationSubnets  = var.delegationSubnets
   additionalTags     = var.additionalTags
 }
 
@@ -143,24 +144,29 @@ module "servicebus" {
   servicebusNamespaceName = var.servicebusNamespaceName
   servicebusNamespaceSku  = var.servicebusNamespaceSku
   serviceBusQueueName     = var.serviceBusQueueName
+  enpointsubnet           = module.subnet.endpointsSubnet_id
+  sbPrivateEndpointName   = var.sbPrivateEndpointName
 }
 
 module "mongodb" {
-  source                    = "./modules/database"
-  additionalTags            = var.additionalTags
-  location                  = var.location
-  resourceGroupName         = var.resourceGroupName
-  cosmosdbAccount           = var.cosmosdbAccount
-  cosmosdbName              = var.cosmosdbName
-  cosmosdbofferType         = var.cosmosdbofferType
-  cosmosdbkind              = var.cosmosdbkind
-  cosmosdbAutomaticFailover = var.cosmosdbAutomaticFailover
-  cosmosdbThroughput        = var.cosmosdbThroughput
-  mongodbVerion             = var.mongodbVerion
-  geoLocationPrimary        = var.geoLocationPrimary
-  geoLocationSeconday       = var.geoLocationSeconday
-  consistencyPolicy         = var.consistencyPolicy
-  dynamodbBackup            = var.dynamodbBackup
+  source                      = "./modules/database"
+  additionalTags              = var.additionalTags
+  location                    = var.location
+  resourceGroupName           = var.resourceGroupName
+  virtualNetworkName          = var.virtualNetworkName
+  enpointsubnet               = module.subnet.endpointsSubnet_id
+  cosmosdbAccount             = var.cosmosdbAccount
+  cosmosdbName                = var.cosmosdbName
+  cosmosdbofferType           = var.cosmosdbofferType
+  cosmosdbkind                = var.cosmosdbkind
+  cosmosdbAutomaticFailover   = var.cosmosdbAutomaticFailover
+  cosmosdbThroughput          = var.cosmosdbThroughput
+  dynamodbPrivateEndpointName = var.dynamodbPrivateEndpointName
+  mongodbVerion               = var.mongodbVerion
+  geoLocationPrimary          = var.geoLocationPrimary
+  geoLocationSeconday         = var.geoLocationSeconday
+  consistencyPolicy           = var.consistencyPolicy
+  dynamodbBackup              = var.dynamodbBackup
 }
 
 module "ase" {

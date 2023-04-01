@@ -1,5 +1,6 @@
 variable "resourceGroupName" {}
 variable "location" {}
+variable "virtualNetworkName" {}
 variable "additionalTags" {}
 variable "cosmosdbAccount" {}
 variable "cosmosdbName" {}
@@ -12,3 +13,5 @@ variable "geoLocationPrimary" {}
 variable "geoLocationSeconday" {}
 variable "consistencyPolicy" {}
 variable "dynamodbBackup" {}
+variable "enpointsubnet" {}
+variable "dynamodbPrivateEndpointName" {}

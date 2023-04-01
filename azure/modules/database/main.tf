@@ -9,8 +9,8 @@ resource "azurerm_cosmosdb_account" "mongodbaccount" {
   // Security Best Practice from checkov: https://docs.bridgecrew.io/
   public_network_access_enabled      = false
   access_key_metadata_writes_enabled = false
+  mongo_server_version               = var.mongodbVerion
 
-  
   //convert the capabilities to vars and setup for foreach block
   capabilities {
     name = "EnableAggregationPipeline"
@@ -23,8 +23,6 @@ resource "azurerm_cosmosdb_account" "mongodbaccount" {
   capabilities {
     name = "EnableServerless"
   }
-
-  mongo_server_version = var.mongodbVerion
 
   consistency_policy {
     consistency_level       = var.consistencyPolicy.consistencyLevel
@@ -55,4 +53,17 @@ resource "azurerm_cosmosdb_mongo_database" "mongodbdatabase" {
   resource_group_name = azurerm_cosmosdb_account.mongodbaccount.resource_group_name
   account_name        = azurerm_cosmosdb_account.mongodbaccount.name
   throughput          = var.cosmosdbThroughput
+}
+
+resource "azurerm_private_endpoint" "cosmos_endpoint" {
+  name                = var.dynamodbPrivateEndpointName
+  location            = var.location
+  resource_group_name = var.resourceGroupName
+  subnet_id           = var.enpointsubnet
+
+  private_service_connection {
+    name                           = "${azurerm_cosmosdb_account.mongodbaccount.name}-connection"
+    private_connection_resource_id = azurerm_cosmosdb_account.mongodbaccount.id
+    is_manual_connection           = false
+  }
 }
